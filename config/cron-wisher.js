@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 const { sendWishMail } = require("./emailService");
 
-let time = "23 21 * * *"; // everyday 0:0:0
+let time = "0 0 * * *"; // everyday 0:0:0
 let scheduled = true,
 	timezone = "Asia/Kolkata";
 
