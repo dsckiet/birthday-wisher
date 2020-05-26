@@ -8,7 +8,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 require("./config/dbconnection");
-require("./config/cron");
+require("./config/cron-wisher");
 
 app.use(compression());
 app.use(morgan("dev"));
