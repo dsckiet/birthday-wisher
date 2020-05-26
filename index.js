@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const compression = require("compression");
+const morgan = require("morgan");
 const { notFound, sendErrors } = require("./config/errorHandler");
 const app = express();
 
@@ -10,6 +11,7 @@ require("./config/dbconnection");
 require("./config/cron");
 
 app.use(compression());
+app.use(morgan("dev"));
 app.use(cors({ exposedHeaders: "x-auth-token" }));
 app.use(
 	bodyParser.urlencoded({
