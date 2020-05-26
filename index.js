@@ -7,6 +7,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 require("./config/dbconnection");
+require("./config/cron");
 
 app.use(compression());
 app.use(cors({ exposedHeaders: "x-auth-token" }));
