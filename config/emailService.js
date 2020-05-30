@@ -1,7 +1,12 @@
 const nodemailer = require("nodemailer");
 
-let { EMAIL_USER, EMAIL_PASS, WISH_MESSAGE } = require("./index");
-const { logger } = require("../utility/helpers");
+let {
+	EMAIL_USER,
+	EMAIL_PASS,
+	WISH_MESSAGE,
+	WISH_MAIL_SUBJECT
+} = require("./index");
+const { logger, toTitleCase } = require("../utility/helpers");
 
 const transporter = nodemailer.createTransport({
 	service: "gmail",
@@ -106,7 +111,7 @@ module.exports.sendWishMail = async (email, data) => {
 	let mailOptions = {
 		from: `DSCKIET <${EMAIL_USER}`,
 		to: email,
-		subject: `Happy Birthday ${name}`,
+		subject: WISH_MAIL_SUBJECT,
 		text: "",
 		html: generateMailHtml(name),
 		headers: {

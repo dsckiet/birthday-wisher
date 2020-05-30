@@ -1,45 +1,45 @@
 <p align="left">
 	<img width="240" src="https://raw.githubusercontent.com/dsckiet/resources/master/dsckiet-logo.png" />
-	<h2 align="left"> < ADD PROJECT TITLE > </h2>
-	<h4 align="left"> < ADD PROJECT DESCRIPTION > <h4>
+	<h2 align="left"> DSC KIET BIRTHDAY WISHER </h2>
+	<h4 align="left"> Automated Birthday wishes email for users of DSC KIET Portal. <h4>
 </p>
 
----
-[![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=for-the-badge&logo=appveyor)](INSERT_LINK_FOR_DOCS_HERE) 
-  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=for-the-badge&logo=appveyor)](INSERT_UI_LINK_HERE)
-
-
 ## Functionalities
-- [ ]  < ADD FUNCTIONALITY >
-- [ ]  < ADD FUNCTIONALITY >
+
+-   Integrated with DSC KIET Portal database
+-   Automatic birthday wishes to users
 
 <br>
 
-
 ## Instructions to run
 
-* Pre-requisites:
-	-  < add pre-requisite >
-	-  < add pre-requisite >
+-   Pre-requisites:
 
-* Directions to setup/install
+    -   Node.js
+    -   NPM
+
+-   Directions to setup/install
+
 ```bash
-< insert code >
+$ git clone https://github.com/dsckiet/birthday-wisher
+$ cd birthday-wisher
+$ touch .env
+$ cp .env.example .env
+# Set values in .env
+$ npm i
 ```
 
-* Directions to execute
+-   Directions to execute
 
 ```bash
-< insert code >
+$ npm start
 ```
 
 <br>
 
 ## Contributors
 
-* [ < ADD YOUR NAME > ](ADD_PROFILE_URL_HERE)
-
-
+-   [Ritik Srivastava](https://ritiksr25.tech)
 
 <br>
 <br>
