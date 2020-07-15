@@ -6,6 +6,8 @@ const {
 	GET_BIRTHDAYS_PROCESS_SECRET
 } = require("./index");
 const { sendWishMail } = require("../services/emailService");
+const { generateImage } = require("../utility/generateWishImage");
+const { toTitleCase } = require("../utility/helpers");
 
 let time = "0 0 * * *"; // everyday 0:0:0
 let scheduled = true,
@@ -28,6 +30,17 @@ let tickFunction = async () => {
 	let wishes = res.data.data;
 	console.log("Running cron task!!");
 	let promises = [];
+	wishes.map(wish => {
+		promises.push(
+			generateImage(
+				toTitleCase(String(wish.name).trim().split(" ")[0]),
+				wish.image,
+				wish._id
+			)
+		);
+	});
+	await Promise.all(promises);
+	promises = [];
 	wishes.map(wish => {
 		promises.push(sendWishMail(wish.email, wish));
 		console.log(`Sending wishes to ${wish.name} (${wish.email})`);

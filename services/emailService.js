@@ -1,12 +1,12 @@
 const nodemailer = require("nodemailer");
 const htmlToText = require("nodemailer-html-to-text").htmlToText;
+const path = require("path");
 
 let {
 	EMAIL_USER,
 	EMAIL_PASS,
 	EMAIL_HOST,
 	EMAIL_SENDER,
-	WISH_MESSAGE,
 	WISH_MAIL_SUBJECT
 } = require("../config/index");
 const { logger, toTitleCase } = require("../utility/helpers");
@@ -25,16 +25,24 @@ const transporter = nodemailer.createTransport({
 });
 
 module.exports.sendWishMail = async (email, data) => {
+	let imagePath = path.join(
+		__dirname,
+		`../assets/images/wish_${data._id}.png`
+	);
 	let { name } = data;
 	let mailOptions = {
 		from: `DSCKIET <${EMAIL_SENDER}`,
-		to: email,
+		to: `${data.name} <${data.email}>`,
+		cc: "dsckiet@gmail.com",
 		subject: WISH_MAIL_SUBJECT,
-		text: "",
-		html: generateMailHtml(
-			toTitleCase(String(name).trim().split(" ")[0]),
-			WISH_MESSAGE
-		),
+		html: generateMailHtml(toTitleCase(String(name).trim().split(" ")[0])),
+		attachments: [
+			{
+				filename: `wish_${data._id}.png`,
+				path: imagePath,
+				cid: "wish_banner"
+			}
+		],
 		headers: {
 			"x-priority": "1",
 			importance: "high"

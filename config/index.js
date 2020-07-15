@@ -9,6 +9,5 @@ module.exports = {
 	EMAIL_SENDER: process.env.EMAIL_SENDER,
 	GET_BIRTHDAYS_PROCESS_API: process.env.GET_BIRTHDAYS_PROCESS_API,
 	GET_BIRTHDAYS_PROCESS_SECRET: process.env.GET_BIRTHDAYS_PROCESS_SECRET,
-	WISH_MESSAGE: "Happy Birthday!!",
-	WISH_MAIL_SUBJECT: "Happy Birthday - DSC KIET"
+	WISH_MAIL_SUBJECT: "Wish You A Very Happy Birthday"
 };
