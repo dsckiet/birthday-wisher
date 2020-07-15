@@ -1,24 +1,4 @@
-const nodemailer = require("nodemailer");
-
-let {
-	EMAIL_USER,
-	EMAIL_PASS,
-	WISH_MESSAGE,
-	WISH_MAIL_SUBJECT
-} = require("./index");
-const { logger, toTitleCase } = require("../utility/helpers");
-
-const transporter = nodemailer.createTransport({
-	service: "gmail",
-	type: "SMTP",
-	host: "smtp.gmail.com",
-	auth: {
-		user: EMAIL_USER,
-		pass: EMAIL_PASS
-	}
-});
-
-const generateMailHtml = name => {
+module.exports.generateMailHtml = name => {
 	return `
 	<html>
 
@@ -59,13 +39,7 @@ const generateMailHtml = name => {
                                                         <tr
                                                             style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:14px;margin:0">
                                                             <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:16px;line-height:24px;vertical-align:top;margin:0;word-wrap:break-word"
-                                                                valign="top">Hi ${toTitleCase(
-																	String(name)
-																		.trim()
-																		.split(
-																			" "
-																		)[0]
-																)},<br>Greetings from DSC KIET!<br>${WISH_MESSAGE}<br /><br>
+                                                                valign="top">Hi ${name},<br>Greetings from DSC KIET!<br>${WISH_MESSAGE}<br /><br>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -104,26 +78,4 @@ const generateMailHtml = name => {
     </body>
     
     </html>`;
-};
-
-module.exports.sendWishMail = async (email, data) => {
-	let { name } = data;
-	let mailOptions = {
-		from: `DSCKIET <${EMAIL_USER}`,
-		to: email,
-		subject: WISH_MAIL_SUBJECT,
-		text: "",
-		html: generateMailHtml(name),
-		headers: {
-			"x-priority": "1",
-			"x-msmail-priority": "High",
-			importance: "high"
-		}
-	};
-	try {
-		await transporter.sendMail(mailOptions);
-	} catch (err) {
-		logger("error", "emailService", err);
-		throw err;
-	}
 };

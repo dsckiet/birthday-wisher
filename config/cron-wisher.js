@@ -5,7 +5,7 @@ const {
 	GET_BIRTHDAYS_PROCESS_API,
 	GET_BIRTHDAYS_PROCESS_SECRET
 } = require("./index");
-const { sendWishMail } = require("./emailService");
+const { sendWishMail } = require("../services/emailService");
 
 let time = "0 0 * * *"; // everyday 0:0:0
 let scheduled = true,
