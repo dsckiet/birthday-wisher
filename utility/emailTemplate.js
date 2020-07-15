@@ -1,4 +1,4 @@
-module.exports.generateMailHtml = name => {
+module.exports.generateMailHtml = (name, message) => {
 	return `
 	<html>
 
@@ -39,7 +39,7 @@ module.exports.generateMailHtml = name => {
                                                         <tr
                                                             style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:14px;margin:0">
                                                             <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:16px;line-height:24px;vertical-align:top;margin:0;word-wrap:break-word"
-                                                                valign="top">Hi ${name},<br>Greetings from DSC KIET!<br>${WISH_MESSAGE}<br /><br>
+                                                                valign="top">Hi ${name},<br>Greetings from DSC KIET!<br>${message}<br /><br>
                                                             </td>
                                                         </tr>
                                                     </tbody>
