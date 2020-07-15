@@ -30,20 +30,16 @@ let tickFunction = async () => {
 	let wishes = res.data.data;
 	console.log("Running cron task!!");
 	let promises = [];
-	wishes.map(wish => {
-		promises.push(
-			generateImage(
-				toTitleCase(String(wish.name).trim().split(" ")[0]),
-				wish.image,
-				wish._id
-			)
+
+	wishes.map(async wish => {
+		let buffer = await generateImage(
+			toTitleCase(String(wish.name).trim().split(" ")[0]),
+			wish.image,
+			wish._id
 		);
-	});
-	await Promise.all(promises);
-	promises = [];
-	wishes.map(wish => {
-		promises.push(sendWishMail(wish.email, wish));
-		console.log(`Sending wishes to ${wish.name} (${wish.email})`);
+		wish.content = buffer;
+		await sendWishMail(wish.email, wish);
+		console.log(`Sent wishes to ${wish.name} (${wish.email})`);
 	});
 	await Promise.all(promises);
 };

@@ -1,5 +1,4 @@
 const { createCanvas, loadImage, registerFont } = require("canvas");
-const fs = require("fs");
 
 // registering font
 registerFont("./assets/fonts/text_font.ttf", {
@@ -17,9 +16,7 @@ module.exports.generateImage = async (name, image, id) => {
 	const context = canvas.getContext("2d");
 
 	// background image settings
-	let bg = await loadImage(
-		"https://dsc-portal-static.s3.ap-south-1.amazonaws.com/birthdays/template.png"
-	);
+	let bg = await loadImage("./assets/images/template.png");
 	context.drawImage(bg, 0, 0, width, height);
 
 	// general text props for name
@@ -31,7 +28,7 @@ module.exports.generateImage = async (name, image, id) => {
 	let photo = await loadImage(image);
 	context.drawImage(photo, 228, 333, 350, 350);
 
-	// store generated buffer
-	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync(`assets/images/wish_${id}.png`, buffer);
+	// generated buffer
+	const buffer = canvas.toBuffer();
+	return buffer;
 };
