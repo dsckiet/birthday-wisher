@@ -1,24 +1,4 @@
-const nodemailer = require("nodemailer");
-
-let {
-	EMAIL_USER,
-	EMAIL_PASS,
-	WISH_MESSAGE,
-	WISH_MAIL_SUBJECT
-} = require("./index");
-const { logger, toTitleCase } = require("../utility/helpers");
-
-const transporter = nodemailer.createTransport({
-	service: "gmail",
-	type: "SMTP",
-	host: "smtp.gmail.com",
-	auth: {
-		user: EMAIL_USER,
-		pass: EMAIL_PASS
-	}
-});
-
-const generateMailHtml = name => {
+module.exports.generateMailHtml = name => {
 	return `
 	<html>
 
@@ -45,8 +25,9 @@ const generateMailHtml = name => {
                                             style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:14px;margin:0">
                                             <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;font-weight:500;margin:0;padding:40px 40px 0 40px"
                                                 valign="top"><img align="none"
-                                                    src="https://raw.githubusercontent.com/goelaakash79/goelaakash79.github.io/master/images/dsckiet-logo.png"
-                                                    style="widows:212px;height:40px;margin:0" width="212" height="40"
+                                                    src="cid:wish_banner"
+                                                    width="470" height="264"
+                                                    alt="happy_birthday_${name}
                                                     class="CToWUd"></td>
                                         </tr>
                                         <tr
@@ -59,13 +40,8 @@ const generateMailHtml = name => {
                                                         <tr
                                                             style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:14px;margin:0">
                                                             <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;box-sizing:border-box;font-size:16px;line-height:24px;vertical-align:top;margin:0;word-wrap:break-word"
-                                                                valign="top">Hi ${toTitleCase(
-																	String(name)
-																		.trim()
-																		.split(
-																			" "
-																		)[0]
-																)},<br>Greetings from DSC KIET!<br>${WISH_MESSAGE}<br /><br>
+                                                                valign="top">Hey ${name}<br/><br/>We wish you a very happy birthday on behalf of the entire DSC KIET family. It’s been a fantastic journey with you as the key part of the team. 
+                                                                We wish you the best for you.<br/><br/>Regards<br/>Team DSC KIET<br/>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -104,26 +80,4 @@ const generateMailHtml = name => {
     </body>
     
     </html>`;
-};
-
-module.exports.sendWishMail = async (email, data) => {
-	let { name } = data;
-	let mailOptions = {
-		from: `DSCKIET <${EMAIL_USER}`,
-		to: email,
-		subject: WISH_MAIL_SUBJECT,
-		text: "",
-		html: generateMailHtml(name),
-		headers: {
-			"x-priority": "1",
-			"x-msmail-priority": "High",
-			importance: "high"
-		}
-	};
-	try {
-		await transporter.sendMail(mailOptions);
-	} catch (err) {
-		logger("error", "emailService", err);
-		throw err;
-	}
 };
