@@ -2,10 +2,10 @@ const { createCanvas, loadImage, registerFont } = require("canvas");
 const fs = require("fs");
 
 // registering font
-registerFont("./assets/fonts/ProductSans-Black.ttf", {
+registerFont("./assets/fonts/text_font.ttf", {
 	weight: 600,
 	style: "normal",
-	family: "ProductSans-Black"
+	family: "text_font"
 });
 
 const width = 1920;
@@ -17,12 +17,14 @@ module.exports.generateImage = async (name, image, id) => {
 	const context = canvas.getContext("2d");
 
 	// background image settings
-	let bg = await loadImage("./assets/images/template.png");
+	let bg = await loadImage(
+		"https://dsc-portal-static.s3.ap-south-1.amazonaws.com/birthdays/template.png"
+	);
 	context.drawImage(bg, 0, 0, width, height);
 
 	// general text props for name
 	context.fillStyle = "#F4B400";
-	context.font = "46px 'ProductSans-Black'";
+	context.font = "46px 'text_font'";
 	context.fillText(`${name} 🎂`, 895, 315);
 
 	// for image
