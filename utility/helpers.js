@@ -25,16 +25,6 @@ log4js.configure({
 let logger = log4js.getLogger();
 logger.level = "debug";
 
-module.exports.toTitleCase = str => {
-	return str
-		.toLowerCase()
-		.split(" ")
-		.map(word => {
-			return word.charAt(0).toUpperCase() + word.slice(1);
-		})
-		.join(" ");
-};
-
 module.exports.logger = (type, funcName, message) => {
 	logger = log4js.getLogger(`Logs from ${funcName} function`);
 

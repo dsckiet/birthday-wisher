@@ -23,12 +23,13 @@ const transporter = nodemailer.createTransport({
 	}
 });
 
-module.exports.sendWishMail = async (email, data) => {
-	let { name, content } = data;
-	let mailOptions = {
-		from: `DSCKIET <${EMAIL_SENDER}`,
+module.exports.sendWishMail = async data => {
+	const { name, content } = data;
+	const mailOptions = {
+		from: `Developer Student Clubs KIET <${EMAIL_SENDER}`,
 		to: `${data.name} <${data.email}>`,
-		cc: "dsckiet@gmail.com",
+		cc: "Developer Student Clubs KIET <dsckiet@gmail.com>",
+		replyTo: "Developer Student Clubs KIET <dsckiet@gmail.com>",
 		subject: WISH_MAIL_SUBJECT,
 		html: generateMailHtml(toTitleCase(String(name).trim().split(" ")[0])),
 		attachments: [

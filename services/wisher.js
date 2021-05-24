@@ -9,25 +9,23 @@ const { sendWishMail } = require("./emailService");
 const { generateImage } = require("../utility/generateWishImage");
 const { toTitleCase } = require("../utility/helpers");
 
-let time = "0 0 * * *"; // everyday 0:0:0
-let scheduled = true,
+const time = "0 0 * * *"; // everyday 0:0:0
+const scheduled = true,
 	timezone = "Asia/Kolkata";
 
-let tickFunction = async () => {
+const tickFunction = async () => {
 	let res = await axios.get(GET_BIRTHDAYS_PROCESS_API, {
 		headers: {
 			"x-access-token": GET_BIRTHDAYS_PROCESS_SECRET
 		}
 	});
 
-	console.log(res.data);
-
 	if (!res || !res.data || res.data.message !== "success") {
 		console.log("Something went wrong!!");
 		return;
 	}
 
-	let wishes = res.data.data;
+	const wishes = res.data.data;
 	console.log("Running cron task!!");
 	let promises = [];
 
@@ -38,8 +36,7 @@ let tickFunction = async () => {
 			wish._id
 		);
 		wish.content = buffer;
-		await sendWishMail(wish.email, wish);
-		console.log(`Sent wishes to ${wish.name} (${wish.email})`);
+		await sendWishMail(wish);
 	});
 	await Promise.all(promises);
 };

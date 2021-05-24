@@ -16,17 +16,17 @@ module.exports.generateImage = async (name, image, id) => {
 	const context = canvas.getContext("2d");
 
 	// background image settings
-	let bg = await loadImage("./assets/images/template.png");
+	const bg = await loadImage("./assets/images/template.png");
 	context.drawImage(bg, 0, 0, width, height);
 
 	// general text props for name
 	context.fillStyle = "#F4B400";
 	context.font = "46px 'text_font'";
-	context.fillText(`${name} 🎂`, 895, 315);
+	context.fillText(`${name} ${String.fromCodePoint(0x1f382)}`, 895, 315);
 
 	// for image
-	let photo = await loadImage(image);
-	context.drawImage(photo, 228, 333, 350, 350);
+	const photo = await loadImage(image);
+	context.drawImage(photo, 198, 277, 425, 425);
 
 	// generated buffer
 	const buffer = canvas.toBuffer();
