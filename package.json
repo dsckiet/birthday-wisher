@@ -1,23 +1,64 @@
 {
-    "name": "birthday-wisher",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon index.js"
-    },
-    "author": "DSC-KIET",
-    "license": "ISC",
-    "dependencies": {
-        "axios": "^0.19.2",
-        "canvas": "^2.6.1",
-        "dotenv": "^8.1.0",
-        "express": "^4.17.1",
-        "log4js": "^6.1.2",
-        "node-cron": "^2.0.3",
-        "nodemailer": "^6.4.6",
-        "nodemailer-html-to-text": "^3.1.0",
-        "nodemon": "^1.19.3"
-    }
+	"name": "birthday-wisher",
+	"version": "1.0.0",
+	"description": "Automated Birthday wishes email for users of DSC KIET Portal.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon index.js",
+		"lint": "prettier \"**/*.{js, json, md, html, css, yml}\" --write"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dsckiet/birthday-wisher.git"
+	},
+	"author": {
+		"name": "Developer Student Clubs KIET",
+		"email": "dsckiet@gmail.com",
+		"url": "https://dsckiet.com"
+	},
+	"contributors": [
+		{
+			"name": "Ritik Srivastava",
+			"email": "ritiksr25@gmail.com",
+			"url": "https://ritiksr25.tech"
+		}
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dsckiet/birthday-wisher/issues"
+	},
+	"homepage": "https://github.com/dsckiet/birthday-wisher#readme",
+	"keywords": [
+		"birthday-wisher",
+		"automated-birthday-wisher",
+		"dsckiet",
+		"mongodb"
+	],
+	"dependencies": {
+		"axios": "^0.19.2",
+		"canvas": "^2.6.1",
+		"dotenv": "^8.1.0",
+		"express": "^4.17.1",
+		"log4js": "^6.1.2",
+		"node-cron": "^2.0.3",
+		"nodemailer": "^6.4.6",
+		"nodemailer-html-to-text": "^3.1.0",
+		"nodemon": "^1.19.3"
+	},
+	"devDependencies": {
+		"husky": "4.3.0",
+		"lint-staged": "10.4.2",
+		"prettier": "^2.1.2"
+	},
+	"lint-staged": {
+		"*.{js, jsx, json, md, html, css, yml}": [
+			"prettier --write"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
 }
