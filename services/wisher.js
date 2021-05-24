@@ -4,8 +4,8 @@ const axios = require("axios");
 const {
 	GET_BIRTHDAYS_PROCESS_API,
 	GET_BIRTHDAYS_PROCESS_SECRET
-} = require("./index");
-const { sendWishMail } = require("../services/emailService");
+} = require("../config/index");
+const { sendWishMail } = require("./emailService");
 const { generateImage } = require("../utility/generateWishImage");
 const { toTitleCase } = require("../utility/helpers");
 
