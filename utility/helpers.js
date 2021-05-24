@@ -1,37 +1,37 @@
-const { OK } = require("./statusCodes");
 const log4js = require("log4js");
 
 log4js.configure({
 	appenders: {
-		app: {
-			type: "file",
-			filename: "logs/app.log",
-			maxLogSize: 10485760
-		},
-		errorFile: {
-			type: "file",
-			filename: "logs/errors.log"
-		},
-		errors: {
-			type: "logLevelFilter",
-			level: "ERROR",
-			appender: "errorFile"
-		}
+		server: { type: "file", filename: "logs/server.log" },
+		wishes: { type: "file", filename: "logs/wishes.log" },
+		error: { type: "file", filename: "logs/error.log" }
 	},
 	categories: {
-		default: { appenders: ["app", "errors"], level: "DEBUG" }
+		server: { appenders: ["server"], level: "DEBUG" },
+		wishes: { appenders: ["wishes"], level: "DEBUG" },
+		error: { appenders: ["error"], level: "DEBUG" },
+		default: { appenders: ["server"], level: "DEBUG" }
 	}
 });
 let logger = log4js.getLogger();
 logger.level = "debug";
 
-module.exports.logger = (type, funcName, message) => {
-	logger = log4js.getLogger(`Logs from ${funcName} function`);
+module.exports.logger = (type, category, logObject, err) => {
+	logger = log4js.getLogger(category);
+	if (type === "error") logger.error(logObject);
+	else if (type === "fatal") logger.fatal(logObject);
+	else if (type === "info") logger.info(logObject);
+	else if (type === "warn") logger.warn(logObject);
+	else if (type === "debug") logger.debug(logObject);
+	else if (type === "trace") logger.trace(logObject);
+};
 
-	if (type === "error") logger.error(message);
-	else if (type === "fatal") logger.fatal(message);
-	else if (type === "info") logger.info(message);
-	else if (type === "warn") logger.warn(message);
-	else if (type === "debug") logger.debug(message);
-	else if (type === "trace") logger.trace(message);
+module.exports.toTitleCase = str => {
+	return str
+		.toLowerCase()
+		.split(" ")
+		.map(word => {
+			return word.charAt(0).toUpperCase() + word.slice(1);
+		})
+		.join(" ");
 };

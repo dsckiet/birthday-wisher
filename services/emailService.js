@@ -8,7 +8,7 @@ let {
 	EMAIL_SENDER,
 	WISH_MAIL_SUBJECT
 } = require("../config/index");
-const { logger, toTitleCase } = require("../utility/helpers");
+const { toTitleCase } = require("../utility/helpers");
 const { generateMailHtml } = require("../utility/emailTemplate");
 
 const transporter = nodemailer.createTransport({
@@ -48,7 +48,6 @@ module.exports.sendWishMail = async data => {
 	try {
 		await transporter.sendMail(mailOptions);
 	} catch (err) {
-		logger("error", "emailService", err);
 		throw err;
 	}
 };
